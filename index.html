@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiggy</title>
+    <style>
+        h1{
+            color: orange;
+            font-weight: bold;
+        }
+        #add{
+            color: black;
+            font-size: 30px;
+            margin: 0 0 100px 125px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div><h1><center>Swiggy Website</center></h1></div>
+    <a href="{% url 'upload' %}" id="add">ADD Item</a>
+    <table style="text-align: center;" border=6 align="center">
+        <tr>
+            <th width="250px">Food</th>
+            <th width="200px">Name</th>
+            <th width="200px">Restaurant</th>
+            <th width="200px">Rating</th>
+            <th width="200px">Cost</th>
+            <th colspan=2>Modifications</th>
+
+        </tr>
+        {% for i in swiggy %}
+            <tr>
+                <td><img width="250px" height="200px"src="{{i.image.url}}" alt="Pic of Food"/></td>
+                <td>{{i.food}}</td>
+                <td>{{i.restaurant}}, {{i.place}}</td>
+                <td>{{i.rating}}</td>
+                <td>{{i.cost}}/-</td>
+
+                <td><a href="/edit/{{i.id}}">Edit</a></td>
+                <td><a href="/delete/{{i.id}}">Delete</a></td>
+                
+            </tr>
+        {% endfor %}        
+    </table>
+</body>
+</html>

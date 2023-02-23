@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if dataPresence %}
+        Update Item
+        {% else %}
+        Add Item
+        {% endif %}</title>
+    
+</head>
+<body>
+    <p>{% if dataPresence %}
+        Update Item
+        {% else %}
+        Add Item
+        {% endif %}</p>
+    <form action="/push-data/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if dataPresence %}
+            <input type="hidden" name="item-id" value="{{data.id}}"/>
+        {% endif %}
+        <label for="fname">Food Name</label>
+        <input type="text" name="fname" id="fname" {% if dataPresence %}value="{{data.food}}"{% endif %}/>
+        <br>
+        <label for="image">Image</label>
+        <input type="file" name="image" id="image" accept=".png, .jpg, .jpeg, .svg, .gif .avif" />
+        <br>
+        <label for="rname">Restaurant Name</label>
+        <input type="text" name="rname" id="rname" {% if dataPresence %}value="{{data.restaurant}}"{% endif %}/>
+        <br>
+        <label for="place">Place</label>
+        <input type="text" name="place" id="place" {% if dataPresence %}value="{{data.place}}"{% endif %}/>
+        <br>
+        <label for="rating">Rating</label>
+        <input type="text" name="rating" id="rating" {% if dataPresence %}value="{{data.rating}}"{% endif %}/>
+        <br>
+        <label for="price">Price</label>
+        <input type="text" name="price" id="price" {% if dataPresence %}value="{{data.cost}}"{% endif %}/>
+        <br>
+        <input type="submit" {% if dataPresence %}value="UPDATE" {% else %}value="UPLOAD"{% endif %}  {% if dataPresence %}name="update"{% else %}name="upload"{% endif %} />
+    </form>
+    
+</body>
+</html>
